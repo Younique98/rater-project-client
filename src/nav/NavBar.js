@@ -47,16 +47,17 @@ export const NavBar = (props) => {
     
     return (
         
-        <nav class="navbar">
+        <nav className="navbar">
   <div id="trapezoid">
       <li>
  <Link className="expandHome ref"  to="/">Games</Link></li>
+ <li><Link className="expandHome ref"  to="/games">All Games</Link></li>
   <li><Link className="expandHome ref"  to="/events">Events</Link></li>
   <Link className="expandHome ref"  to="/profile">My Profile</Link>
-    <a href="https://www.linkedin.com/in/ericathompsonsmiles/" class="expandHome ref">Contact Us</a>
-     <div class="subnav">
-     <button class="subnavbtn">Major Gaming Locations<i class="fa fa-caret-down"></i></button>
-       <div class="subnav-content">
+    <a href="https://www.linkedin.com/in/ericathompsonsmiles/" className="expandHome ref">Contact Us</a>
+     <div className="subnav">
+     <button className="subnavbtn">Major Gaming Locations<i className="fa fa-caret-down"></i></button>
+       <div className="subnav-content">
         <div id="subnav-trapezoid">
           <a className="refSub subText" href="http://www.thegamecave.net/">FizzBall Gamers</a>
           <a className="refSub subText" href="http://gamegalaxyarcade.com/">LeetCode Let Me Out</a>
@@ -65,11 +66,11 @@ export const NavBar = (props) => {
        </div>
     </div>
   
-     <div class="subnav">
+     <div className="subnav">
          <li>
-     <Link className="subnavbtnSpec floatEventsText" to="/">Join Us<i class="fa fa-caret-down"></i></Link>
-       <div class="subnav-content">
-        <div class="subnav-trapezoid">
+     <Link className="subnavbtnSpec floatEventsText" to="/">Join Us<i className="fa fa-caret-down"></i></Link>
+       <div className="subnav-content">
+        <div className="subnav-trapezoid">
           <Link className="refSub subText" to="/register">Register to Play</Link>
           <Link className="refSub subText" to="/login">Login in to Join</Link>
          </div>
@@ -80,42 +81,3 @@ export const NavBar = (props) => {
 </nav>
     )
 }
-// export const NavBar = (props) => {
-//     return (
-//         <ul className="navbar">
-//             <li className="navbar__item">
-//             <Link className="navbar__link" to="/login">Login</Link>
-//             </li>
-//             <li className="navbar__item">
-//             <Link className="navbar__link" to="/">Games</Link>
-//             </li>
-//             <li className="navbar__item">
-//             <Link className="navbar__link" to="/events">Events</Link>
-//             </li>
-//             <li className="navbar__item">
-//             <Link className="navbar__link" to="/profile">Profile</Link>
-//             </li>
-//             <li className="navbar__item">
-//             <Link className="navbar__link" to="/register">Sign Up</Link>
-//             </li>
-//             {
-//                 (localStorage.getItem("lu_token") !== null) ?
-//                     <li className="nav-item">
-//                         <button className="nav-link fakeLink"
-//                             onClick={() => {
-//                                 localStorage.removeItem("lu_token")
-//                                 props.history.push({ pathname: "/" })
-//                             }}
-//                         >Logout</button>
-//                     </li> :
-//                     <>
-//                         <li className="nav-item">
-//                             <Link className="nav-link" to="/login">Login</Link>
-//                         </li>
-//                         <li className="nav-item">
-//                             <Link className="nav-link" to="/register">Register</Link>
-//                         </li>
-//                     </>
-//             }        </ul>
-//     )
-// }
