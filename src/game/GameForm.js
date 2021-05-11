@@ -3,10 +3,10 @@ import { GameContext } from "./GameProvider.js";
 import { useHistory } from "react-router-dom";
 import "./Game.css";
 
-export const GameForm = () => {
+export const GameForm = (props) => {
   const history = useHistory();
-  const { createGame, getGameCategories, gameCategories, games, getGames } = useContext(GameContext);
-
+  const { createGame, getGameCategories, gameCategories, getGames, games, updateGame } = useContext(GameContext);
+  const [ eventState, setEvent ] = useState({})
   /*
         Since the input fields are bound to the values of
         the properties of this state variable, you need to
@@ -22,7 +22,15 @@ export const GameForm = () => {
     designer: localStorage.getItem("lu_token"),
     categoryId: 0,
   });
+  const editMode = props.match.params.hasOwnProperty("gameId")
 
+  const getGameInEditMode = () => {
+    if (editMode) {
+        const gameId = parseInt(props.match.params.gameId)
+        const selectedGame = games.find(g => g.id === gameId) || {}
+        setEvent(selectedGame)
+    }
+}
   /*
         Get game types on initialization so that the <select>
         element presents game type choices to the user.
@@ -32,6 +40,9 @@ export const GameForm = () => {
     getGames();
   }, []);
 
+  useEffect(() => {
+    getGameInEditMode()
+}, [games])
   /*
         REFACTOR CHALLENGE START
 
@@ -76,31 +87,60 @@ export const GameForm = () => {
     newGameState.ageRecommendation = event.target.value;
     setCurrentGame(newGameState);
   };
-  const changeGameDesignerState = (event) => {
-    const newGameState = { ...currentGame };
-    newGameState.designer = event.target.value;
-    setCurrentGame(newGameState);
-  };
+
   const changeGameCategoryState = (event) => {
     const newGameState = { ...currentGame };
     newGameState.categoryId = event.target.value;
     setCurrentGame(newGameState);
   };
+
+  const constructUpdateGame = () => {
+    const gameId = parseInt(currentGame.gameId)
+
+    if (gameId === 0) {
+        window.alert("Please select an game")
+    } else {
+        if (editMode) {console.log(eventState)
+            // PUT
+            updateGame({
+              
+                id: eventState.id,
+                title: eventState.title,
+                description: eventState.description,
+                yearReleased: eventState.yearReleased,
+                estimatedTimeToPlay: eventState.estimatedTimeToPlay,
+                numberOfPlayers: eventState.numberOfPlayers,
+                ageRecommendation: eventState.ageRecommendation,
+                categoryId: eventState.categoryId,
+                designer: localStorage.getItem("lu_token")
+            })
+                .then(() => props.history.push("/"))
+        } 
+    }
+}
+
+
+
+
+
   /* REFACTOR CHALLENGE END */
 
   return (
+    
     <form className="gameForm">
-      <h2 className="gameForm__title">Register New Game</h2>
+      <h2 className="gameForm__title">{editMode ? "Update Game" : "Register New Game"}</h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="title">Title: </label>
           <input
             type="text"
             name="title"
+            placeholder="Game title"
+            defaultValue={eventState.title}
             required
             autoFocus
             className="form-control"
-            value={currentGame.title}
+
             onChange={changeGameTitleState}
           />
         </div>
@@ -111,10 +151,12 @@ export const GameForm = () => {
           <input
             type="text"
             name="description"
+            placeholder="Game Description"
+            defaultValue={eventState.description}
             required
             autoFocus
             className="form-control"
-            value={currentGame.description}
+
             onChange={changeGameDescriptionState}
           />
         </div>
@@ -125,10 +167,12 @@ export const GameForm = () => {
           <input
             type="text"
             name="yearReleased"
+            placeholder="Game Year Released"
+            defaultValue={eventState.year_released}
             required
             autoFocus
             className="form-control"
-            value={currentGame.yearReleased}
+
             onChange={changeGameYearReleasedState}
           />
         </div>
@@ -141,10 +185,12 @@ export const GameForm = () => {
           <input
             type="text"
             name="estimatedTimeToPlay"
+            placeholder="Game Estimated Play Time?"
+            defaultValue={eventState.estimated_time_to_play}
             required
             autoFocus
             className="form-control"
-            value={currentGame.estimatedTimeToPlay}
+
             onChange={changeGameEstimatedTimeToPlayState}
           />
         </div>
@@ -155,10 +201,12 @@ export const GameForm = () => {
           <input
             type="text"
             name="numberOfPlayers"
+            placeholder="Game numberOfPlayers"
+            defaultValue={eventState.number_of_players}
             required
             autoFocus
             className="form-control"
-            value={currentGame.numberOfPlayers}
+
             onChange={changeGameNumberOfPlayersState}
           />
         </div>
@@ -171,10 +219,12 @@ export const GameForm = () => {
           <input
             type="text"
             name="ageRecommendation"
+            placeholder="Game ageRecommendation"
+            defaultValue={eventState.age_recommendation}
             required
             autoFocus
             className="form-control"
-            value={currentGame.ageRecommendation}
+
             onChange={changeGameAgeRecommendationState}
           />
         </div>
@@ -185,8 +235,9 @@ export const GameForm = () => {
           <select
             name="categoryId"
             className="form-control"
-            value={currentGame.categoryId}
+            defaultValue={eventState.category_id}
             onChange={changeGameCategoryState}
+            placeholder="Game Category"
           >
             <option value="0">Select a Game Category</option>
             {gameCategories.map((category) => (
@@ -221,8 +272,16 @@ export const GameForm = () => {
         }}
         className="btn btn-primary"
       >
-        Create
+        Create Game
       </button>
+      <button type="submit"
+                onClick={evt => {
+                    evt.preventDefault()
+                    constructUpdateGame()
+                }}
+                className="btn btn-primary">
+                {editMode ? "Save Updates" : "Edit Event"}
+            </button>
     </form>
   );
 };

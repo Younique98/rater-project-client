@@ -1,19 +1,22 @@
 import React, { useContext, useEffect} from "react";
 import { GameContext } from "./GameProvider.js";
 import { useHistory } from 'react-router-dom'
+import { Link } from "react-router-dom"
 
 export const GameList = (props) => {
-  const { games, getGames, getGameCategories, joinGame, leaveGame, gameCategories } = useContext(GameContext);
+  const { games, getGames, getGameCategories, joinGame, leaveGame } = useContext(GameContext);
 
     const history = useHistory();
 
   useEffect(() => {
-    getGames();
-    getGameCategories();
+    getGames()
+    .then(getGameCategories);
   }, []);
 
   return (
     <article className="gameHolder">
+       <h1 className="raterGameTitle">Rater Gamer</h1>
+    <div className="registrationButton">
     <button
         className="btn btn-2 btn-sep icon-create"
         onClick={() => {
@@ -22,15 +25,18 @@ export const GameList = (props) => {
       >
         Register New Game
       </button>
+      </div>
       <article className="games">
       {
       games.map(game => {     
-        console.log(game)
         return <section key={game.id} className="game">
           <div className="individualGames">
           
             <div className="game__title">
-              Name of the Game: {game.title}
+              <Link to={`/games/${game.id}`}>
+                Name of the Game: {game.title}
+              </Link>
+              
             </div>
             <div className="game__description">
               Description of the Game: {game.description}
@@ -48,6 +54,7 @@ export const GameList = (props) => {
               What should the age be of the players? {game.age_recommendation}
             </div>
         </div>
+        <div className="gameButtons">
         {
                             game.joined
                                 ? <button className="btn btn-3"
@@ -55,8 +62,17 @@ export const GameList = (props) => {
                                     >Leave</button>
                                 : <button className="btn btn-2"
                                     onClick={() => joinGame(game.id)}
-                                    >Join</button>
+                                    >Follow</button>
                         }
+                        <button
+        className="btn btn-2 btn-sep icon-create"
+        onClick={() => {
+          history.push({ pathname: `/gamereview/${game.id}` });
+        }}
+      >
+        View Game Reviews
+      </button>
+       </div>                 
           </section>;
       })
       }
