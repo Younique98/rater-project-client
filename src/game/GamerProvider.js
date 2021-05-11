@@ -14,7 +14,7 @@ export const GamerProvider = (props) => {
             }
         })
             .then(response => response.json())
-            .then(setGames)
+            .then(setGamer)
     }
 
 
@@ -24,8 +24,8 @@ export const GamerProvider = (props) => {
     }
 
     return (
-        <GameContext.Provider value={{ getGamer, getGamerById, gamer }} >
+        <GamerContext.Provider value={{ getGamer, getGamerById, gamer }} >
             { props.children }
-        </GameContext.Provider>
+        </GamerContext.Provider>
     )
 }

@@ -7,8 +7,8 @@ export const ReviewProvider = (props) => {
 
 
 
-    const getReviews = () => {
-        return fetch("http://localhost:8000/gamereview", {
+    const getReviews = (gameId) => {
+        return fetch(`http://localhost:8000/gamereview?game=${gameId}`, {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`
             }
@@ -18,7 +18,7 @@ export const ReviewProvider = (props) => {
     }
     
     const createReview = (review) => {
-        return fetch("http://localhost:8000/reviews", { 
+        return fetch("http://localhost:8000/gamereview", { 
         method: "POST",    
         headers:{
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`,

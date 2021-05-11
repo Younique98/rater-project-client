@@ -1,0 +1,36 @@
+.reviewHolder{
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 250px;
+    padding-top: 20px;
+}
+
+.reviews{
+    display: flex;
+justify-content: space-around;
+    flex-wrap: wrap;
+  padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 40px;
+  padding-top: 20px;
+  flex-direction: column;
+
+}
+
+.flexReview{
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 40px;
+  padding-top: 20px;
+    
+}
+.individualreviews{
+    
+border: 2px solid lightblue;
+padding-right: 30px;
+  padding-bottom: 50px;
+  padding-left: 40px;
+  padding-top: 20px;
+}
