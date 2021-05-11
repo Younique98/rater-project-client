@@ -19,10 +19,9 @@ export const GamerProvider = (props) => {
 
 
     const getGamerById = (id) => {
-        return fetch(`http://localhost:8088/gamers/${id}`)
+        return fetch(`http://localhost:8000/gamers/${id}`)
             .then(res => res.json())
     }
-
 
     return (
         <GameContext.Provider value={{ getGamer, getGamerById, gamer }} >

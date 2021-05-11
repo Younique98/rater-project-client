@@ -51,20 +51,8 @@ export const NavBar = (props) => {
   <div id="trapezoid">
       <li>
  <Link className="expandHome ref"  to="/">Games</Link></li>
- <li><Link className="expandHome ref"  to="/games">All Games</Link></li>
-  <li><Link className="expandHome ref"  to="/events">Events</Link></li>
   <Link className="expandHome ref"  to="/profile">My Profile</Link>
     <a href="https://www.linkedin.com/in/ericathompsonsmiles/" className="expandHome ref">Contact Us</a>
-     <div className="subnav">
-     <button className="subnavbtn">Major Gaming Locations<i className="fa fa-caret-down"></i></button>
-       <div className="subnav-content">
-        <div id="subnav-trapezoid">
-          <a className="refSub subText" href="http://www.thegamecave.net/">FizzBall Gamers</a>
-          <a className="refSub subText" href="http://gamegalaxyarcade.com/">LeetCode Let Me Out</a>
-          <a className="refSub subText" href="NAGACentral.com">Always Learning</a>
-        </div>
-       </div>
-    </div>
   
      <div className="subnav">
          <li>
