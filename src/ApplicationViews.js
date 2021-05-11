@@ -8,6 +8,9 @@ import { ReviewForm } from "./game/ReviewForm.js";
 import { ReviewProvider } from "./game/ReviewProvider.js";
 import { ProfileProvider } from "./auth/ProfileProvider"
 import { Profile} from "./auth/Profile"
+import { ReviewList } from "./game/ReviewList"
+import { GamerProvider } from "./game/GamerProvider"
+
 export const ApplicationViews = () => {
   return (
     <>
@@ -17,6 +20,7 @@ export const ApplicationViews = () => {
           lineHeight: "1.75rem",
         }}
       >
+        <GamerProvider>
         <GameProvider>
           <ReviewProvider>
             <Route exact path="/">
@@ -42,14 +46,23 @@ export const ApplicationViews = () => {
               render={(props) => {
                 return <GameDetails {...props} />;
               }}
-            />
+            >
+            </Route>
+            <Route
+            path="/reviews/:gameId(\d+)"
+            render={(props) => {
+              return <ReviewList {...props} />;
+            }}>
+              </Route>
           </ReviewProvider>
-        </GameProvider>
         <ProfileProvider>
           <Route exact path="/profile">
             <Profile />
           </Route>
         </ProfileProvider>
+        </GameProvider>
+        </GamerProvider>
+        
       </main>
     </>
   );

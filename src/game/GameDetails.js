@@ -25,14 +25,9 @@ export const GameDetails = (props) => {
   }, []);
   return (
     <section className="gameDetail">
-      <button
-        onClick={() => {
-          props.history.push(`/gamereview/new`);
-        }}
-      >
-        Write A Review
-      </button>
-      <h3 className="gameDetail__title">Title: {game.title}</h3>
+      {/* {console.log(game)} */}
+      <h1 className="gameName">{game.title}</h1>
+      <div className="bodyOfGameDetails">
       <div className="gameDetail__description">Description: {game.description}</div>
       <div className="gameDetail__yearReleased">
         Year Released: {game.year_released}
@@ -52,21 +47,28 @@ export const GameDetails = (props) => {
       <div className="gameDetail__designer">Designer: {game.designer}</div>
       {/* <div className="game__category">
         {gameCategories.map((category) => {
-            console.log(category)
-            // category = id: 1, category: "Strategy
+          console.log(category)
+          // category = id: 1, category: "Strategy
           games.map((currentGame) => {
-              console.log(currentGame)
+            console.log(currentGame)
             const gamedisplayed = currentGame.category_id === category.id || {}
             console.log(gamedisplayed);
             return (
               <div key={category.id} className="category">
-                <div>{category.category}</div>
+              <div>{category.category}</div>
               </div>
-            );
-          });
-        })}
-      </div> */}
+              );
+            });
+          })}
+        </div> */}
 
+        <button
+          onClick={() => {
+            props.history.push(`/gamereview/new`);
+          }}
+        >
+          Write A Review
+        </button>
       <button
         onClick={() =>
           DeleteGame(game.id).then(() => props.history.push("/"))
@@ -82,6 +84,7 @@ export const GameDetails = (props) => {
       >
         Edit
       </button>
+      </div>
     </section>
   );
 };

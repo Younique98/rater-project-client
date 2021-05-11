@@ -67,7 +67,7 @@ export const GameList = (props) => {
                         <button
         className="btn btn-2 btn-sep icon-create"
         onClick={() => {
-          history.push({ pathname: `/gamereview/${game.id}` });
+          history.push({ pathname: `/reviews/${game.id}` });
         }}
       >
         View Game Reviews
