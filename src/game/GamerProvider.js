@@ -8,7 +8,7 @@ export const GamerProvider = (props) => {
 
 
     const getGamer = () => {
-        return fetch("http://localhost:8000/gamers", {
+        return fetch("http://localhost:8000/gamer", {
             headers:{
                 "Authorization": `Token ${localStorage.getItem("lu_token")}`
             }
@@ -19,7 +19,7 @@ export const GamerProvider = (props) => {
 
 
     const getGamerById = (id) => {
-        return fetch(`http://localhost:8000/gamers/${id}`)
+        return fetch(`http://localhost:8000/gamer/${id}`)
             .then(res => res.json())
     }
 

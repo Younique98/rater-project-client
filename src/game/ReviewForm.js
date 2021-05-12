@@ -98,21 +98,17 @@ export const ReviewForm = () => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="rating">How would you rate this game? </label>
+            <option value="0">Select a Rating</option>
           <select
             name="rating"
             className="form-control"
             value={currentReview.rating}
-            onChange={changeReviewRatingState}
-          >
-            <option value="0">Select a Rating</option>
-          
-              <select name="rating" id="rating">
+            onChange={changeReviewRatingState} name="rating" id="rating">
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
-            </select>
             </select>
         </div>
       </fieldset>

@@ -34,7 +34,7 @@ export const GameList = (props) => {
           
             <div className="game__title">
               <Link to={`/games/${game.id}`}>
-                Name of the Game: {game.title}
+                {game.title}
               </Link>
               
             </div>

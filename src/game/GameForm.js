@@ -38,6 +38,7 @@ export const GameForm = (props) => {
   useEffect(() => {
     getGameCategories();
     getGames();
+    console.log(props)
   }, []);
 
   useEffect(() => {
@@ -67,7 +68,7 @@ export const GameForm = (props) => {
 
   const changeGameYearReleasedState = (event) => {
     const newGameState = { ...currentGame };
-    newGameState.yearReleased = event.target.value;
+    newGameState.year_released = event.target.value;
     setCurrentGame(newGameState);
   };
 
@@ -90,28 +91,31 @@ export const GameForm = (props) => {
 
   const changeGameCategoryState = (event) => {
     const newGameState = { ...currentGame };
-    newGameState.categoryId = event.target.value;
+    newGameState.categories = event.target.value;
     setCurrentGame(newGameState);
   };
 
   const constructUpdateGame = () => {
-    const gameId = parseInt(currentGame.gameId)
+    const gameId = parseInt(eventState.id)
 
     if (gameId === 0) {
         window.alert("Please select an game")
     } else {
-        if (editMode) {console.log(eventState)
+        if (editMode) 
+        {console.log(eventState)
             // PUT
+            console.log(currentGame)
+            debugger
             updateGame({
               
                 id: eventState.id,
-                title: eventState.title,
+                title: currentGame.title,
                 description: eventState.description,
-                yearReleased: eventState.yearReleased,
-                estimatedTimeToPlay: eventState.estimatedTimeToPlay,
-                numberOfPlayers: eventState.numberOfPlayers,
-                ageRecommendation: eventState.ageRecommendation,
-                categoryId: eventState.categoryId,
+                yearReleased: eventState.year_released,
+                estimatedTimeToPlay: eventState.estimated_time_to_play,
+                numberOfPlayers: eventState.number_of_players,
+                ageRecommendation: eventState.age_recommendation,
+                categoryId: currentGame.categories,
                 designer: localStorage.getItem("lu_token")
             })
                 .then(() => props.history.push("/"))
@@ -135,7 +139,7 @@ export const GameForm = (props) => {
           <input
             type="text"
             name="title"
-            placeholder="Game title"
+            placeholder="Title"
             defaultValue={eventState.title}
             required
             autoFocus
@@ -151,7 +155,7 @@ export const GameForm = (props) => {
           <input
             type="text"
             name="description"
-            placeholder="Game Description"
+            placeholder="Description"
             defaultValue={eventState.description}
             required
             autoFocus
@@ -167,7 +171,7 @@ export const GameForm = (props) => {
           <input
             type="text"
             name="yearReleased"
-            placeholder="Game Year Released"
+            placeholder="Year Released"
             defaultValue={eventState.year_released}
             required
             autoFocus
@@ -180,7 +184,7 @@ export const GameForm = (props) => {
       <fieldset>
         <div className="form-group">
           <label htmlFor="estimatedTimeToPlay">
-            Length of Time to beat this game?
+            How many hours to beat this game?
           </label>
           <input
             type="text"
@@ -201,7 +205,7 @@ export const GameForm = (props) => {
           <input
             type="text"
             name="numberOfPlayers"
-            placeholder="Game numberOfPlayers"
+            placeholder="How many Players needed?"
             defaultValue={eventState.number_of_players}
             required
             autoFocus
@@ -219,7 +223,7 @@ export const GameForm = (props) => {
           <input
             type="text"
             name="ageRecommendation"
-            placeholder="Game ageRecommendation"
+            placeholder="Age Recommended"
             defaultValue={eventState.age_recommendation}
             required
             autoFocus
@@ -235,11 +239,12 @@ export const GameForm = (props) => {
           <select
             name="categoryId"
             className="form-control"
-            defaultValue={eventState.category_id}
+            defaultValue={eventState.categories}
             onChange={changeGameCategoryState}
             placeholder="Game Category"
           >
             <option value="0">Select a Game Category</option>
+            {console.log(gameCategories)}
             {gameCategories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.category}
