@@ -71,6 +71,7 @@ export const GameProvider = (props) => {
     }
 
     const joinGame = gameId => {
+        debugger
         return fetch(`http://localhost:8000/games/${ gameId }/signup`, {
             method: "POST",
             headers:{

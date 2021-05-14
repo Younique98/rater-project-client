@@ -28,7 +28,8 @@ export const GameList = (props) => {
       </div>
       <article className="games">
       {
-      games.map(game => {     
+      games.map(game => {
+        console.log(game)     
         return <section key={game.id} className="game">
           <div className="individualGames">
           
@@ -52,6 +53,9 @@ export const GameList = (props) => {
             </div>
             <div className="game__ageRec">
               What should the age be of the players? {game.age_recommendation}
+            </div>
+            <div className="game__ageRec">
+             Average Rating of this Game? {game.average_rating}
             </div>
         </div>
         <div className="gameButtons">
