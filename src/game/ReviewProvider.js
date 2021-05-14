@@ -27,7 +27,6 @@ export const ReviewProvider = (props) => {
             body: JSON.stringify(review)
         })
             .then(response => response.json())
-            .then(getReviews)
     }
     return (
         <ReviewContext.Provider value={{ createReview, getReviews, reviews }} >

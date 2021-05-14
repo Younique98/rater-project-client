@@ -9,7 +9,7 @@ export const ReviewList = (props) => {
   const { gameId } = useParams();
   
   useEffect(() => {
-     getReviews(gameId);
+     getReviews(parseInt(gameId));
   }, []);
 
 
@@ -21,7 +21,6 @@ export const ReviewList = (props) => {
       <div className="flexReview">
         <article className="reviews">
           {reviews.map((review) => {
-              console.log(review)
 
               return (
                 <section key={review.id} className="review">

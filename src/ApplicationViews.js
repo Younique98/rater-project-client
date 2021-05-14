@@ -42,9 +42,10 @@ export const ApplicationViews = () => {
               path="/games/:gameId(\d+)"render={
                 props => <GameDetails {...props} />
               }/>
-            <Route exact path="/gamereview/new">
-              <ReviewForm />
-            </Route>
+            <Route 
+            exact path="/gamereview/new" render={(props) => <ReviewForm {...props} /> 
+            }/>
+        
             <Route
               path="/gamereview/:gameId(\d+)"
               render={(props) => {

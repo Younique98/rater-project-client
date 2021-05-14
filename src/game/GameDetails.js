@@ -7,8 +7,6 @@ export const GameDetails = (props) => {
     DeleteGame,
     getGameById,
     getGameCategories,
-    gameCategories,
-    games,
     getGames
   } = useContext(GameContext);
 
@@ -25,7 +23,6 @@ export const GameDetails = (props) => {
   }, []);
   return (
     <section className="gameDetail">
-      {/* {console.log(game)} */}
       <h1 className="gameName">{game.title}</h1>
       <div className="bodyOfGameDetails">
       <div className="gameDetail__description">Description: {game.description}</div>
@@ -44,23 +41,6 @@ export const GameDetails = (props) => {
       <div className="gameDetail__ageRecommendation">
         Age Recommendation: {game.category_id}
       </div>
-      <div className="gameDetail__designer">Designer: {game.designer}</div>
-      {/* <div className="game__category">
-        {gameCategories.map((category) => {
-          console.log(category)
-          // category = id: 1, category: "Strategy
-          games.map((currentGame) => {
-            console.log(currentGame)
-            const gamedisplayed = currentGame.category_id === category.id || {}
-            console.log(gamedisplayed);
-            return (
-              <div key={category.id} className="category">
-              <div>{category.category}</div>
-              </div>
-              );
-            });
-          })}
-        </div> */}
 
         <button
           onClick={() => {

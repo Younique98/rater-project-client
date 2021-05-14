@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import "./Review.css"
 import { GameContext } from "./GameProvider"
 
-export const ReviewForm = () => {
+export const ReviewForm = (props) => {
   const history = useHistory();
   const { createReview, getReviews } = useContext(ReviewContext);
   const { getGames, games } = useContext(GameContext);
@@ -16,7 +16,7 @@ export const ReviewForm = () => {
     */
   const [currentReview, setCurrentReview] = useState({
     reviewDescrip: "",
-    rating: 0,
+    rating: 1,
     gamerId: localStorage.getItem("lu_token"),
     gameId: 0,
   });
@@ -26,7 +26,7 @@ export const ReviewForm = () => {
         element presents Review type choices to the user.
     */
   useEffect(() => {
-    getReviews();
+    // getReviews();
     getGames();
   }, []);
 
@@ -123,9 +123,9 @@ export const ReviewForm = () => {
 
           const review = {
             reviewDescrip: currentReview.reviewDescrip,
-            rating: currentReview.rating,
+            rating: parseInt(currentReview.rating),
             gamerId: localStorage.getItem("lu_token"),
-            gameId: currentReview.gameId
+            gameId: parseInt(currentReview.gameId)
           };
           // Send POST request to your API
           createReview(review).then(() => history.push("/"));

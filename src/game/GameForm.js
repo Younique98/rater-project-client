@@ -38,7 +38,7 @@ export const GameForm = (props) => {
   useEffect(() => {
     getGameCategories();
     getGames();
-    console.log(props)
+
   }, []);
 
   useEffect(() => {
@@ -102,10 +102,9 @@ export const GameForm = (props) => {
         window.alert("Please select an game")
     } else {
         if (editMode) 
-        {console.log(eventState)
+
             // PUT
-            console.log(currentGame)
-            debugger
+
             updateGame({
               
                 id: eventState.id,
@@ -119,7 +118,7 @@ export const GameForm = (props) => {
                 designer: localStorage.getItem("lu_token")
             })
                 .then(() => props.history.push("/"))
-        } 
+         
     }
 }
 
@@ -244,7 +243,7 @@ export const GameForm = (props) => {
             placeholder="Game Category"
           >
             <option value="0">Select a Game Category</option>
-            {console.log(gameCategories)}
+
             {gameCategories.map((category) => (
               <option key={category.id} value={category.id}>
                 {category.category}
