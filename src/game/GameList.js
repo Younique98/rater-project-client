@@ -28,8 +28,7 @@ export const GameList = (props) => {
       </div>
       <article className="games">
       {
-      games.map(game => {
-        console.log(game)     
+      games.map(game => {   
         return <section key={game.id} className="game">
           <div className="individualGames">
           
@@ -64,9 +63,10 @@ export const GameList = (props) => {
                                 ? <button className="btn btn-3"
                                     onClick={() => leaveGame(game.id)}
                                     >Leave</button>
-                                : <button className="btn btn-2"
-                                    onClick={() => joinGame(game.id)}
-                                    >Follow</button>
+                                : ""
+                                // <button className="btn btn-2"
+                                //     onClick={() => joinGame(game.id)}
+                                //     >Follow</button>
                         }
                         <button
         className="btn btn-2 btn-sep icon-create"

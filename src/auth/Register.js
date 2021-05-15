@@ -10,6 +10,7 @@ export const Register = (props) => {
     const password = React.createRef()
     const verifyPassword = React.createRef()
     const passwordDialog = React.createRef()
+    const uploadCurrentGamePlaying = React.createRef()
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -21,28 +22,30 @@ export const Register = (props) => {
                 "last_name": lastName.current.value,
                 "bio": bio.current.value,
                 "email": email.current.value,
-                "password": password.current.value
+                "password": password.current.value,
+                "uploadCurrentGamePlaying": uploadCurrentGamePlaying.current.files[0]
             }
-
-            return fetch("http://127.0.0.1:8000/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json"
-                },
-                body: JSON.stringify(newUser)
-            })
-                .then(res => res.json())
-                .then(res => {
-                    if ("token" in res) {
-                        localStorage.setItem("lu_token", res.token)
-                        props.history.push("/")
-                    }
-                })
-        } else {
-            passwordDialog.current.showModal()
+            
+return fetch("http://127.0.0.1:8000/register", {
+    method: "POST",
+    headers: {
+        "Authorization": `Token ${localStorage.getItem("lu_token")}`,
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    },
+    body: JSON.stringify(newUser)
+})
+    .then(res => res.json())
+    .then(res => {
+        if ("token" in res) {
+            localStorage.setItem("lu_token", res.token)
+            props.history.push("/")
         }
-    }
+    })
+} else {
+passwordDialog.current.showModal()
+}
+}
 
     return (
         <main style={{ textAlign: "center" }}>
@@ -75,8 +78,12 @@ export const Register = (props) => {
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
                 </fieldset>
                 <fieldset>
-                    <label htmlFor="verifyPassword"> Verify Password </label>
+                    <label htmlFor="verifyPassword"> Bio </label>
                     <textarea ref={bio} name="bio" className="form-control" placeholder="Let other gamers know a little bit about you..." />
+                </fieldset>
+                <fieldset>
+                    <label htmlFor="uploadCurrentGamePlaying"> Image of Current Game Being Played </label>
+                    <input type="file" ref={uploadCurrentGamePlaying} name="uploadCurrentGamePlaying" className="form-control" placeholder="Please upload an image of the current game you are playing..." />
                 </fieldset>
                 <fieldset style={{
                     textAlign: "center"
